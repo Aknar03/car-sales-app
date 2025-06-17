@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Car } from '@/types/cars';
 import Modal from '@/components/Modal';
+import Image from 'next/image';
 
 export default function CarCard({ car }: { car: Car }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,10 +30,11 @@ export default function CarCard({ car }: { car: Car }) {
           className="relative h-48 cursor-pointer group"
           onClick={() => setIsModalOpen(true)}
         >
-          <img
+          <Image
             src={mainImage}
             alt={`${car.mark_id} ${car.model_name}`}
-            className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300"
+            fill
+            className="object-cover transition-transform group-hover:scale-105 duration-300 rounded"
           />
           <div className="absolute bottom-2 right-2 bg-black/60 text-white text-sm px-2 py-1 rounded">
             {car.images_amount} фото
@@ -79,10 +81,11 @@ export default function CarCard({ car }: { car: Car }) {
 
           {/* Галерея */}
           <div className="relative w-full aspect-video rounded-lg overflow-hidden">
-            <img
+            <Image
               src={images[currentImageIndex]}
               alt={`Авто ${currentImageIndex + 1}`}
-              className="object-cover w-full h-full transition-opacity duration-300"
+              fill
+              className="object-cover transition-opacity duration-300 rounded"
             />
             {images.length > 1 && (
               <>
